@@ -16,19 +16,16 @@ stages:
     - path: data\raw\stocks.csv
       md5: 5a54c49d13506bce6bdaea5de94b7605
       size: 134773008
-  split_data:
-    cmd: python src\split_data.py --config=params.yaml
+  process_data:
+    cmd: python src\process_data.py --config=params.yaml
     deps:
     - path: data\raw\stocks.csv
       md5: 5a54c49d13506bce6bdaea5de94b7605
       size: 134773008
-    - path: src\split_data.py
-      md5: 6b2c2947449c0f893fb1f892fba13efe
-      size: 1023
+    - path: src\process_data.py
+      md5: 8366d6d3e9fd2470bbd0daf90138c939
+      size: 789
     outs:
-    - path: data\processed\test_stocks.csv
-      md5: 50810f1fc672e3812ce0212477fab824
-      size: 26961269
-    - path: data\processed\train_stocks.csv
-      md5: 8a1691597a8f10339a543a8bf6f0289b
-      size: 107816548
+    - path: data\processed\stocks.csv
+      md5: 5a54c49d13506bce6bdaea5de94b7605
+      size: 134773008
