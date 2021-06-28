@@ -40,16 +40,16 @@ stages:
       size: 2953
     params:
       params.yaml:
-        estimators.HHDBSCAN.params.cluster_selection_epsilon: 2
+        estimators.HHDBSCAN.params.cluster_selection_epsilon: 4
         estimators.HHDBSCAN.params.min_cluster_size: 60
         estimators.HHDBSCAN.params.min_samples: 1
     outs:
     - path: report\params.json
-      md5: d05d70002914a2e8c84ec7347d32d031
+      md5: 037e7e0d3975ab6d7eeca22619d4235a
       size: 92
     - path: report\scores.json
-      md5: 03bfe3f763cea08884d243ef65419abe
+      md5: 41e1c1490a05cfc276569a2f1fced7f5
       size: 75
     - path: saved_models\model.joblib
-      md5: 48b832425c538397ad40fff475f8427d
-      size: 168397093
+      md5: 239e39c1123124927a3c4f37f2973be1
+      size: 168396493

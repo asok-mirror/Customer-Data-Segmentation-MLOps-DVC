@@ -13,9 +13,12 @@ process_data: data\processed\stocks.csv
 estimators:
   HHDBSCAN:
     params:
+      # min_cluster_size: 60
+      # min_samples: 1
+      # cluster_selection_epsilon: 2
       min_cluster_size: 60
       min_samples: 1
-      cluster_selection_epsilon: 2
+      cluster_selection_epsilon: 4
 
 model_dir: saved_models
 
