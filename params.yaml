@@ -8,14 +8,17 @@ data_source:
 load_data:
   raw_dataset_csv: data\raw\stocks.csv
 
-process_data: data\processed\stocks.csv  
+process_data: data\processed\stocks.csv
 
 estimators:
   HHDBSCAN:
-  params:
-    min_cluster_size: 60
-    min_samples: 1
-    cluster_selection_epsilon: 2
-  
+    params:
+      min_cluster_size: 60
+      min_samples: 1
+      cluster_selection_epsilon: 2
+
 model_dir: saved_models
 
+reports:
+  scores: report\scores.json
+  params: report\params.json

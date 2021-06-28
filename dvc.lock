@@ -29,3 +29,27 @@ stages:
     - path: data\processed\stocks.csv
       md5: 5a54c49d13506bce6bdaea5de94b7605
       size: 134773008
+  train_and_evaluate:
+    cmd: python src\train_and_evaluate.py --config=params.yaml
+    deps:
+    - path: data\processed\stocks.csv
+      md5: 5a54c49d13506bce6bdaea5de94b7605
+      size: 134773008
+    - path: src\train_and_evaluate.py
+      md5: 3708ff147d80c6e5148012e25fc91731
+      size: 2953
+    params:
+      params.yaml:
+        estimators.HHDBSCAN.params.cluster_selection_epsilon: 2
+        estimators.HHDBSCAN.params.min_cluster_size: 60
+        estimators.HHDBSCAN.params.min_samples: 1
+    outs:
+    - path: report\params.json
+      md5: d05d70002914a2e8c84ec7347d32d031
+      size: 92
+    - path: report\scores.json
+      md5: 03bfe3f763cea08884d243ef65419abe
+      size: 75
+    - path: saved_models\model.joblib
+      md5: 48b832425c538397ad40fff475f8427d
+      size: 168397093
