@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Clustering on stocks data
+{% endblock title %}
+
+{% block custom_css %}
+<!-- Custom CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock custom_css %}
+
+{% block body %}
+
+<div class="container-fluid masthead">
+    <div class="row">
+        <div class="col">
+            <form method="POST">
+                <div class="form-group">
+                    <label for="translation">
+                        <blockquote class="blockquote">
+                            <p class="mb-2">Enter the details as indicated:</p>
+                        </blockquote>
+                    </label>
+                    <div class="mb-3">
+                        <label for="year" class="form-label">Year</label>
+                        <input id="year" class="form-control" name="year" type='number' placeholder="Add a year" required min="1700">
+                         <div class="invalid-feedback" >
+                          Please provide a valid year.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Predict</button></br>
+                    </br>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+            
+        </div>
+    </div> 
+</div>
+
+
+{% endblock body %}
+
+{% block custom_js %}
+<!-- Custom JS -->
+<script src="{{ url_for('static', filename='script/index.js') }}"></script>
+{% endblock custom_js %}

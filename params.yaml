@@ -1,27 +1,24 @@
 base:
-  project: Clustering-on-stocksData
+  project: Clustering-on-mall customers data
   random_state: 42
 
 data_source:
-  s3_source: data_given\stocks.csv
+  s3_source: data_given\Mall_Customers.csv
 
 load_data:
-  raw_dataset_csv: data\raw\stocks.csv
+  raw_dataset_csv: data\raw\Mall_Customers.csv
 
-process_data: data\processed\stocks.csv
+process_data: data\processed\Mall_Customers.csv
 
 estimators:
-  HHDBSCAN:
+  KMeans:
     params:
-      # min_cluster_size: 60
-      # min_samples: 1
-      # cluster_selection_epsilon: 2
-      min_cluster_size: 60
-      min_samples: 1
-      cluster_selection_epsilon: 4
+      n_clusters: 12
 
 model_dir: saved_models
 
 reports:
   scores: report\scores.json
   params: report\params.json
+
+webapp_final_model_dir: prediction_service/model/model.joblib

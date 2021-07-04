@@ -1,5 +1,3 @@
 {
-    "min_cluster_size": 60,
-    "min_samples": 1,
-    "cluster_selection_epsilon": 4
+    "cluster_size": 12
 }
