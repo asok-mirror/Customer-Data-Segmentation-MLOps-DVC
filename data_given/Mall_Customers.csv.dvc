@@ -1,0 +1,4 @@
+outs:
+- md5: fa68f23677495652d6498d63e67b744f
+  size: 3981
+  path: Mall_Customers.csv
