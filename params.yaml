@@ -22,3 +22,5 @@ reports:
   params: report\params.json
 
 webapp_final_model_dir: prediction_service\model\model.joblib
+
+trained_data: data\trained\Mall_Customers.csv

@@ -27,7 +27,8 @@ stages:
       - report\scores.json:
           cache: false
       - report\params.json:
-          cache: false      
+          cache: false
     outs:
       - saved_models\model.joblib
       - prediction_service\model\model.joblib
+      - data\trained\Mall_Customers.csv

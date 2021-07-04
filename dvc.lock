@@ -36,15 +36,19 @@ stages:
       md5: fa68f23677495652d6498d63e67b744f
       size: 3981
     - path: src\train_and_evaluate.py
-      md5: fec89e54daf6849badf20de135dafa10
-      size: 2626
+      md5: 41d0a86f4bf6616b6cfee9295d1b5493
+      size: 2900
     params:
       params.yaml:
         estimators.KMeans.params.n_clusters: 12
     outs:
+    - path: data\trained\Mall_Customers.csv
+      md5: f61e4a6a12241e74a6fa01336939d7a1
+      size: 2881
     - path: prediction_service\model\model.joblib
-      md5: 1ce00d8abcb4878c4d1d62d145d303a8
+      md5: 9f51a20da435456f487a49f0c12971e7.dir
       size: 2394
+      nfiles: 1
     - path: report\params.json
       md5: 3c1ee0a35c71541a8b54c2ded3d27d16
       size: 28

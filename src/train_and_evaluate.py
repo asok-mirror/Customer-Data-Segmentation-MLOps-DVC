@@ -29,6 +29,7 @@ def train_and_evaluate(config_path):
     random_state = config["base"]["random_state"]
     model_dir = config["model_dir"]
     webapp_final_model_dir = config["webapp_final_model_dir"]
+    trained_data = config["trained_data"]
 
     n_clusters = config["estimators"]["KMeans"]["params"]["n_clusters"]
 
@@ -51,6 +52,12 @@ def train_and_evaluate(config_path):
     silhouette_score = eval_metrics(data, estimator.labels_)
 
     print('The silhouette score is: %f' % silhouette_score)
+
+    labels = pd.DataFrame(estimator.labels_)
+    data_with_labels = pd.concat((data,labels),axis=1)
+    data_with_labels = data_with_labels.rename({0:'labels'},axis=1)
+
+    data_with_labels.to_csv(trained_data, index=False)
 
 ################################################################
     scores_file = config["reports"]["scores"]
