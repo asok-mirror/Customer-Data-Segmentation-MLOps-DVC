@@ -3,9 +3,9 @@ stages:
   load_data:
     cmd: python src\load_data.py --config=params.yaml
     deps:
-    - path: data_given\stocks.csv
-      md5: b20fdab8d1a99c9ab0176916d780d7f4
-      size: 134290457
+    - path: data_given\Mall_Customers.csv
+      md5: fa68f23677495652d6498d63e67b744f
+      size: 3981
     - path: src\get_data.py
       md5: 4f990b7136dd3cadbf5ba774cf7f6520
       size: 676
@@ -13,43 +13,41 @@ stages:
       md5: 540ef7967c0dd2a4ad883fe32436b95e
       size: 587
     outs:
-    - path: data\raw\stocks.csv
-      md5: 5a54c49d13506bce6bdaea5de94b7605
-      size: 134773008
+    - path: data\raw\Mall_Customers.csv
+      md5: fa68f23677495652d6498d63e67b744f
+      size: 3981
   process_data:
     cmd: python src\process_data.py --config=params.yaml
     deps:
-    - path: data\raw\stocks.csv
-      md5: 5a54c49d13506bce6bdaea5de94b7605
-      size: 134773008
+    - path: data\raw\Mall_Customers.csv
+      md5: fa68f23677495652d6498d63e67b744f
+      size: 3981
     - path: src\process_data.py
       md5: 8366d6d3e9fd2470bbd0daf90138c939
       size: 789
     outs:
-    - path: data\processed\stocks.csv
-      md5: 5a54c49d13506bce6bdaea5de94b7605
-      size: 134773008
+    - path: data\processed\Mall_Customers.csv
+      md5: fa68f23677495652d6498d63e67b744f
+      size: 3981
   train_and_evaluate:
     cmd: python src\train_and_evaluate.py --config=params.yaml
     deps:
-    - path: data\processed\stocks.csv
-      md5: 5a54c49d13506bce6bdaea5de94b7605
-      size: 134773008
+    - path: data\processed\Mall_Customers.csv
+      md5: fa68f23677495652d6498d63e67b744f
+      size: 3981
     - path: src\train_and_evaluate.py
-      md5: 3708ff147d80c6e5148012e25fc91731
-      size: 2953
+      md5: 2b46d6717a28bef1ada88181d59a6cec
+      size: 2375
     params:
       params.yaml:
-        estimators.HHDBSCAN.params.cluster_selection_epsilon: 4
-        estimators.HHDBSCAN.params.min_cluster_size: 60
-        estimators.HHDBSCAN.params.min_samples: 1
+        estimators.KMeans.params.n_clusters: 12
     outs:
     - path: report\params.json
-      md5: 037e7e0d3975ab6d7eeca22619d4235a
-      size: 92
+      md5: 3c1ee0a35c71541a8b54c2ded3d27d16
+      size: 28
     - path: report\scores.json
-      md5: 41e1c1490a05cfc276569a2f1fced7f5
-      size: 75
+      md5: 4c0e4763c88321c3c374d4aa8046d809
+      size: 50
     - path: saved_models\model.joblib
-      md5: 239e39c1123124927a3c4f37f2973be1
-      size: 168396493
+      md5: 1ce00d8abcb4878c4d1d62d145d303a8
+      size: 2394
