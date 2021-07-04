@@ -16,7 +16,6 @@ from get_data import read_params
 import argparse
 import joblib
 import json
-from shutil import copyfile
 
 
 def eval_metrics(data, kmeans_labels):
@@ -79,7 +78,7 @@ def train_and_evaluate(config_path):
 
     joblib.dump(pipeline, model_path)
     # Save the model to prediction service
-    copyfile(model_path, webapp_final_model_dir)
+    joblib.dump(pipeline, webapp_final_model_dir)  
 
 
 if __name__ == "__main__":
