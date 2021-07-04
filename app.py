@@ -17,7 +17,7 @@ def index():
             if request.form:  # from webfrom
                 data = dict(request.form)
                 response = prediction.form_response(data)
-                return render_template("index.html", response = response)
+                return render_template("index.html", response = response, request = request.form)
             elif request.json:  # from api
                 response = prediction.api_response(request.json)
                 return jsonify(response)

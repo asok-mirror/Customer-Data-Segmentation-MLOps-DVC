@@ -30,7 +30,7 @@ Clustering on stocks data
                     </div>
                     <div class="mb-3">
                         <label for="age" class="form-label">Age</label>
-                        <input id="age" class="form-control" name="age" type='number' placeholder="Enter an age"
+                        <input id="age" class="form-control" name="age" type='number' placeholder="Enter an age" value="{{ request['age'] }}"
                             required min="1">
                         <div class="invalid-feedback">
                             Please provide a valid age.
@@ -38,7 +38,7 @@ Clustering on stocks data
                     </div>
                     <div class="mb-3">
                         <label for="annual-income" class="form-label">Annual Income</label>
-                        <input id="annual-income" class="form-control" name="annual-income" type='number'
+                        <input id="annual-income" class="form-control" name="annual-income" type='number' value="{{ request['annual-income'] }}"
                             placeholder="Enter your annual income" required min="1">
                         <div class="invalid-feedback">
                             Please provide a valid annual income.
@@ -46,7 +46,7 @@ Clustering on stocks data
                     </div>
                     <div class="mb-3">
                         <label for="spending-score" class="form-label">Spending Score</label>
-                        <input id="spending-score" class="form-control" name="spending-score" type='number'
+                        <input id="spending-score" class="form-control" name="spending-score" type='number' value="{{ request['spending-score'] }}"
                             placeholder="Enter the spending score" required min="1">
                         <div class="invalid-feedback">
                             Please provide a valid spending score.
