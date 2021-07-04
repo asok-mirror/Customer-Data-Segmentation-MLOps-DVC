@@ -1,6 +1,6 @@
-#Load the train and test files
-#train model
-#save the metrics and params
+# Load the train and test files
+# train model
+# save the metrics and params
 
 import os
 import warnings
@@ -16,9 +16,11 @@ from get_data import read_params
 import argparse
 import joblib
 import json
+from shutil import copyfile
+
 
 def eval_metrics(data, kmeans_labels):
-    silhouette = silhouette_score(data, kmeans_labels)    
+    silhouette = silhouette_score(data, kmeans_labels)
     return silhouette
 
 
@@ -27,22 +29,22 @@ def train_and_evaluate(config_path):
     processed_data_path = config["process_data"]
     random_state = config["base"]["random_state"]
     model_dir = config["model_dir"]
+    webapp_final_model_dir = config["webapp_final_model_dir"]
 
-    n_clusters = config["estimators"]["KMeans"]["params"]["n_clusters"]    
+    n_clusters = config["estimators"]["KMeans"]["params"]["n_clusters"]
 
     data = pd.read_csv(processed_data_path)
 
-    data = data.drop(columns= ['CustomerID'], axis = 1, errors='ignore')
+    data = data.drop(columns=['CustomerID'], axis=1, errors='ignore')
 
-    data['Gender'] = data.Gender.map({ 'Male' : 1, 'Female' : 2})
+    data['Gender'] = data.Gender.map({'Male': 1, 'Female': 2})
 
-    print(data.head()) 
+    print(data.head())
 
     pipeline = Pipeline([
-                    ('scaler', StandardScaler()),
-                    ('estimator', KMeans(n_clusters=n_clusters, random_state=random_state))                
-                ])
-
+        ('scaler', StandardScaler()),
+        ('estimator', KMeans(n_clusters=n_clusters, random_state=random_state))
+    ])
 
     pipeline.fit(data)
     estimator = pipeline.named_steps['estimator']
@@ -69,9 +71,16 @@ def train_and_evaluate(config_path):
 ################################################################
 
     os.makedirs(model_dir, exist_ok=True)
+    os.makedirs(webapp_final_model_dir, exist_ok=True)
+
     model_path = os.path.join(model_dir, "model.joblib")
+    webapp_final_model_dir = os.path.join(
+        webapp_final_model_dir, "model.joblib")
 
     joblib.dump(pipeline, model_path)
+    # Save the model to prediction service
+    copyfile(model_path, webapp_final_model_dir)
+
 
 if __name__ == "__main__":
     args = argparse.ArgumentParser()
