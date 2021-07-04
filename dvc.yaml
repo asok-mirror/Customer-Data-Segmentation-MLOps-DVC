@@ -4,27 +4,25 @@ stages:
     deps:
       - src\get_data.py
       - src\load_data.py
-      - data_given\stocks.csv
+      - data_given\Mall_Customers.csv
     outs:
-      - data\raw\stocks.csv
+      - data\raw\Mall_Customers.csv
 
   process_data:
     cmd: python src\process_data.py --config=params.yaml
     deps:
       - src\process_data.py
-      - data\raw\stocks.csv
+      - data\raw\Mall_Customers.csv
     outs:
-      - data\processed\stocks.csv
+      - data\processed\Mall_Customers.csv
 
   train_and_evaluate:
     cmd: python src\train_and_evaluate.py --config=params.yaml
     deps:
-      - data\processed\stocks.csv
+      - data\processed\Mall_Customers.csv
       - src\train_and_evaluate.py
     params:
-      - estimators.HHDBSCAN.params.min_cluster_size
-      - estimators.HHDBSCAN.params.min_samples
-      - estimators.HHDBSCAN.params.cluster_selection_epsilon
+      - estimators.KMeans.params.n_clusters
     metrics:
       - report\scores.json:
           cache: false
