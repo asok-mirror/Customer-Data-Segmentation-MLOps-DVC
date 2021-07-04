@@ -1,7 +1,9 @@
 import yaml
 import joblib
+import numpy as np
 
 params_path = "params.yaml"
+
 
 def read_params(config_path):
     with open(config_path) as yaml_file:
@@ -16,6 +18,13 @@ def predict(data):
     prediction = model.predict(data).tolist()[0]
     return prediction
 
-def form_response(dict_request):
-    data = dict_request.values()
-    return data
+
+def form_response(request):
+    data = request.values()
+    data = [list(map(int, data))]
+    return predict(data)
+
+def api_response(request):
+    data = np.array([list(request.values())])
+    response = predict(data)
+    return { "response" : response }

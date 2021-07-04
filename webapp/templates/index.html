@@ -6,12 +6,12 @@ Clustering on stocks data
 
 {% block custom_css %}
 <!-- Custom CSS -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 {% endblock custom_css %}
 
 {% block body %}
 
-<div class="container-fluid masthead">
+<div class="container-fluid masthead main-container">
     <div class="row">
         <div class="col">
             <form method="POST">
@@ -22,21 +22,56 @@ Clustering on stocks data
                         </blockquote>
                     </label>
                     <div class="mb-3">
-                        <label for="year" class="form-label">Year</label>
-                        <input id="year" class="form-control" name="year" type='number' placeholder="Add a year" required min="1700">
-                         <div class="invalid-feedback" >
-                          Please provide a valid year.
+                        <label for="gender" class="form-label">Gender</label>
+                        <select name="gender" class="form-select form-control">
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input id="age" class="form-control" name="age" type='number' placeholder="Enter an age"
+                            required min="1">
+                        <div class="invalid-feedback">
+                            Please provide a valid age.
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mb-2">Predict</button></br>
+                    <div class="mb-3">
+                        <label for="annual-income" class="form-label">Annual Income</label>
+                        <input id="annual-income" class="form-control" name="annual-income" type='number'
+                            placeholder="Enter your annual income" required min="1">
+                        <div class="invalid-feedback">
+                            Please provide a valid annual income.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="spending-score" class="form-label">Spending Score</label>
+                        <input id="spending-score" class="form-control" name="spending-score" type='number'
+                            placeholder="Enter the spending score" required min="1">
+                        <div class="invalid-feedback">
+                            Please provide a valid spending score.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Cluster</button></br>
                     </br>
                 </div>
             </form>
         </div>
         <div class="col">
-            
+            <div class="form-group">
+                <label for="result">
+                    <blockquote class="blockquote">
+                        <p class="mb-2">Prediction:</p>
+                    </blockquote>
+                </label>
+                <div class="mb-3">
+                    <label for="output" class="form-label">Cluster Group</label>
+                    <textarea readonly class="form-control" id="result"
+                        rows="5">Cluster Group is: {{ response }}</textarea>
+                </div>
+            </div>
         </div>
-    </div> 
+    </div>
 </div>
 
 

@@ -1,57 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="Clustering on Stocks using HDBSCAN - MLOps and DVC">
-        <meta name="keywords" content="HDBSCAN, Clustering, MLOps, DVC">
-        <meta name="author" content="Asok Kalisamy">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">  
-        {% block custom_css %}
-        {% endblock custom_css %}
 
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
-    
-        <!-- jQuery google CDN-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      
-        {% block custom_js %}
-        {% endblock custom_js %}
-        <title>
-            {% block title %}
-            {% endblock title %}
-        </title>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-expand">
-            <div class="container-fluid">
-            <a class="navbar-brand" href="#"><h3>Stock - Clustering<span class="badge bg-secondary">V1.0</span></h3></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Clustering on mall customer shopping pattern using KMeans - MLOps and DVC">
+    <meta name="keywords" content="KMeans, Clustering, MLOps, DVC">
+    <meta name="author" content="Asok Kalisamy">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% block custom_css %}
+    {% endblock custom_css %}
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <!-- jQuery google CDN-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    {% block custom_js %}
+    {% endblock custom_js %}
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-expand">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <h3>Stock - Clustering<span class="badge bg-secondary">V1.0</span></h3>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            </div>
-        </nav>
+        </div>
+    </nav>
 
-        {% block body %}
-        {% endblock body %}
-        
+    {% block body %}
+    {% endblock body %}
+
+    <footer class="footer position-sticky">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid float-end">
-                    <a href="https://www.linkedin.com/in/asokkalidass/" class="link-secondary"><i class="fa fa-linkedin"></i></a>
-                    <a href="https://github.com/asok-mirror/Car_Prediction_Regression" class="link-secondary"><i style="font-size:24px" class="fa">&#xf092;</i></a>
+                <a href="https://www.linkedin.com/in/asokkalidass/" class="link-secondary" target="_blank"><i
+                        class="fa fa-linkedin"></i></a>
+                <a href="https://github.com/asok-mirror/Customer_Data_Segmentation_MLOps_DVC" class="link-secondary"
+                    target="_blank"><i style="font-size:24px" class="fa">&#xf092;</i></a>
             </div>
-        
         </nav>
-        
-    </body>
+    </footer>
+</body>
+
 </html>
