@@ -17,14 +17,14 @@ def index():
             if request.form:  # from webfrom
                 data = dict(request.form)
                 response = prediction.form_response(data)
-                return render_template("index.html", response = response, request = request.form)
+                return render_template("index.html", response=response, request=request.form)
             elif request.json:  # from api
                 response = prediction.api_response(request.json)
                 return jsonify(response)
         except Exception as ex:
             print(ex)
             error = {"error": "Something went wrong!!", "exception": ex}
-            return render_template("404.html", error)
+            return render_template("error.html", error)
     else:
         return render_template("index.html")
 

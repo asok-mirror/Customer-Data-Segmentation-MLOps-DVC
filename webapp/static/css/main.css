@@ -5,7 +5,7 @@ body {
 .main-container {
   margin-top: 10px !important;
   margin-bottom: 10px !important;
-  min-height: calc(100vh - 42px - 69.25px - 20px);
+  min-height: calc(100vh - 42px - 71.34px - 20px);
 }
 
 .overlay {
@@ -38,6 +38,7 @@ body {
 .pair-plot img {
   display: inline-block;
   margin-top: 12px;
+  margin-bottom: 12px;
   height: auto;
   width: 100%;
 }
