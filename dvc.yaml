@@ -23,12 +23,18 @@ stages:
       - src\train_and_evaluate.py
     params:
       - estimators.KMeans.params.n_clusters
-    metrics:
-      - report\scores.json:
-          cache: false
-      - report\params.json:
-          cache: false
+    # metrics:
+    #   - report\scores.json:
+    #       cache: false
+    #   - report\params.json:
+    #       cache: false
     outs:
-      - saved_models\model.joblib
-      - prediction_service\model\model.joblib
-      - data\trained\Mall_Customers.csv
+    #   - saved_models\model.joblib
+    #   - prediction_service\model\model.joblib
+        - data\trained\Mall_Customers.csv
+
+  # log_production_model:
+  #   cmd: python src\train_and_evaluate.py --config=params.yaml
+  #   deps:
+  #     - src\log_production_model.py
+
