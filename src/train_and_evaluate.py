@@ -11,11 +11,14 @@ from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.cluster import KMeans
+from urllib.parse import urlparse
 import argparse
 from get_data import read_params
 import argparse
 import joblib
 import json
+import mlflow
+import mlflow.sklearn
 
 
 def eval_metrics(data, kmeans_labels):
@@ -30,6 +33,8 @@ def train_and_evaluate(config_path):
     model_dir = config["model_dir"]
     webapp_final_model_dir = config["webapp_final_model_dir"]
     trained_data = config["trained_data"]
+    mlflow_config = config["mlflow_config"]
+    remote_server_uri = mlflow_config["remote_server_uri"]
 
     n_clusters = config["estimators"]["KMeans"]["params"]["n_clusters"]
 
@@ -41,52 +46,73 @@ def train_and_evaluate(config_path):
 
     print(data.head())
 
-    pipeline = Pipeline([
-        ('scaler', StandardScaler()),
-        ('estimator', KMeans(n_clusters=n_clusters, random_state=random_state))
-    ])
+####################### MLFLOW #######################
 
-    pipeline.fit(data)
-    estimator = pipeline.named_steps['estimator']
+    mlflow.set_tracking_uri(remote_server_uri)
 
-    silhouette_score = eval_metrics(data, estimator.labels_)
+    mlflow.set_experiment(mlflow_config["experiment_name"])
 
-    print('The silhouette score is: %f' % silhouette_score)
+    with mlflow.start_run(run_name=mlflow_config["run_name"]) as mlops_run:
 
-    labels = pd.DataFrame(estimator.labels_)
-    data_with_labels = pd.concat((data,labels),axis=1)
-    data_with_labels = data_with_labels.rename({0:'labels'},axis=1)
+        pipeline = Pipeline([
+            ('scaler', StandardScaler()),
+            ('estimator', KMeans(n_clusters=n_clusters, random_state=random_state))
+        ])
 
-    data_with_labels.to_csv(trained_data, index=False)
+        pipeline.fit(data)
+        estimator = pipeline.named_steps['estimator']
 
-################################################################
-    scores_file = config["reports"]["scores"]
-    params_file = config["reports"]["params"]
+        silhouette_score = eval_metrics(data, estimator.labels_)
 
-    with open(scores_file, "w") as f:
-        scores = {
-            "silhouette_score": silhouette_score
-        }
-        json.dump(scores, f, indent=4)
+        #print('The silhouette score is: %f' % silhouette_score)
+        mlflow.log_param("n_clusters", n_clusters)
+        mlflow.log_metric("silhouette_score", silhouette_score)
 
-    with open(params_file, "w") as f:
-        params = {
-            "cluster_size": n_clusters,
-        }
-        json.dump(params, f, indent=4)
-################################################################
+        tracking_url_type_store = urlparse(mlflow.get_artifact_uri()).scheme
 
-    os.makedirs(model_dir, exist_ok=True)
-    os.makedirs(webapp_final_model_dir, exist_ok=True)
+        if tracking_url_type_store != "file":
+            mlflow.sklearn.log_model(
+                pipeline,
+                "model",
+                registered_model_name=mlflow_config["registered_model_name"])
+        else:
+            mlflow.sklearn.load_model(pipeline, "model")
 
-    model_path = os.path.join(model_dir, "model.joblib")
-    webapp_final_model_dir = os.path.join(
-        webapp_final_model_dir, "model.joblib")
+        labels = pd.DataFrame(estimator.labels_)
+        data_with_labels = pd.concat((data, labels), axis=1)
+        data_with_labels = data_with_labels.rename({0: 'labels'}, axis=1)
 
-    joblib.dump(pipeline, model_path)
-    # Save the model to prediction service
-    joblib.dump(pipeline, webapp_final_model_dir)  
+        data_with_labels.to_csv(trained_data, index=False)
 
+    ################################################################
+        # scores_file = config["reports"]["scores"]
+        # params_file = config["reports"]["params"]
+
+        # with open(scores_file, "w") as f:
+        #     scores = {
+        #         "silhouette_score": silhouette_score
+        #     }
+        #     json.dump(scores, f, indent=4)
+
+        # with open(params_file, "w") as f:
+        #     params = {
+        #         "cluster_size": n_clusters,
+        #     }
+        #     json.dump(params, f, indent=4)
+    ################################################################
+
+        # os.makedirs(model_dir, exist_ok=True)
+        # os.makedirs(webapp_final_model_dir, exist_ok=True)
+
+        # model_path = os.path.join(model_dir, "model.joblib")
+        # webapp_final_model_dir = os.path.join(
+        #     webapp_final_model_dir, "model.joblib")
+
+        # joblib.dump(pipeline, model_path)
+        # # Save the model to prediction service
+        # joblib.dump(pipeline, webapp_final_model_dir)
+
+####################### END OF MLFLOW #######################
 
 if __name__ == "__main__":
     args = argparse.ArgumentParser()

@@ -1,0 +1,1 @@
+mlflow server --backend-store-uri sqlite:///customerSegmentationmlflow.db --default-artifact-root .\artifacts -h 127.0.0.1 -p 5001
