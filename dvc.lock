@@ -49,12 +49,12 @@ stages:
     cmd: python src\log_production_model.py --config=params.yaml
     deps:
     - path: src\log_production_model.py
-      md5: 83feb905ea6fd8e7547d50c77a8eae73
-      size: 1974
+      md5: 1c9948ce44e822eec7abcb5188fad960
+      size: 2035
     outs:
     - path: prediction_service\model\model.joblib
-      md5: fb6f0d85d39c7842e69fc2cf90541c72
-      size: 2300
+      md5: edaa0a3b13e5d328763719def8e54ee6
+      size: 2236
     - path: saved_models\model.joblib
-      md5: fb6f0d85d39c7842e69fc2cf90541c72
-      size: 2300
+      md5: edaa0a3b13e5d328763719def8e54ee6
+      size: 2236
