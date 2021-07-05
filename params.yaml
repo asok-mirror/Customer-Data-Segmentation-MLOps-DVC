@@ -20,7 +20,7 @@ estimators:
       #n_clusters: 7
       n_clusters: 8
 
-model_dir: saved_models
+model_dir: saved_models\model.joblib
 
 reports:
   scores: report\scores.json

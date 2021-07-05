@@ -30,8 +30,8 @@ def train_and_evaluate(config_path):
     config = read_params(config_path)
     processed_data_path = config["process_data"]
     random_state = config["base"]["random_state"]
-    model_dir = config["model_dir"]
-    webapp_final_model_dir = config["webapp_final_model_dir"]
+    #model_dir = config["model_dir"]
+    #webapp_final_model_dir = config["webapp_final_model_dir"]
     trained_data = config["trained_data"]
     mlflow_config = config["mlflow_config"]
     remote_server_uri = mlflow_config["remote_server_uri"]
