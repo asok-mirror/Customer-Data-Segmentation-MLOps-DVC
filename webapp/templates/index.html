@@ -30,16 +30,16 @@ Clustering on stocks data
                     </div>
                     <div class="mb-3">
                         <label for="age" class="form-label">Age</label>
-                        <input id="age" class="form-control" name="age" type='number' placeholder="Enter an age" value="{{ request['age'] }}"
-                            required min="1">
+                        <input id="age" class="form-control" name="age" type='number' placeholder="Enter an age between 18 to 70" value="{{ request['age'] }}"
+                            required min="18" max="70" pattern="\d*">
                         <div class="invalid-feedback">
                             Please provide a valid age.
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="annual-income" class="form-label">Annual Income</label>
+                        <label for="annual-income" class="form-label">Annual Income (K$)</label>
                         <input id="annual-income" class="form-control" name="annual-income" type='number' value="{{ request['annual-income'] }}"
-                            placeholder="Enter your annual income" required min="1">
+                            placeholder="Enter an annual income between 15 to 137 " required min="15" max="137" step="0.01">
                         <div class="invalid-feedback">
                             Please provide a valid annual income.
                         </div>
@@ -47,7 +47,7 @@ Clustering on stocks data
                     <div class="mb-3">
                         <label for="spending-score" class="form-label">Spending Score</label>
                         <input id="spending-score" class="form-control" name="spending-score" type='number' value="{{ request['spending-score'] }}"
-                            placeholder="Enter the spending score" required min="1">
+                            placeholder="Enter the spending score between 1 to 99" required min="1" max="99" pattern="\d*">
                         <div class="invalid-feedback">
                             Please provide a valid spending score.
                         </div>
@@ -67,11 +67,17 @@ Clustering on stocks data
                 <div class="mb-3">
                     <label for="output" class="form-label">Cluster Group</label>
                     <textarea readonly class="form-control" id="result"
-                        rows="5">Cluster Group is: {{ response }}</textarea>
+                        rows="5">Cluster Label is: {{ response }}</textarea>
                 </div>
             </div>
-        </div>
+        </div>             
     </div>
+    <div class="row align-self-center w-100">
+            <div class="pair-plot col-6 mx-auto">
+                <label for="output" class="form-label">Pair Plot</label>
+                <img src="{{ url_for('static', filename='images/output.png') }}" alt="mall customer relationships">
+            </div>            
+    </div> 
 </div>
 
 
