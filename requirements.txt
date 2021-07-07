@@ -2,6 +2,5 @@ dvc
 dvc[gdrive]
 sklearn
 pandas
-hdbscan
 flake8
 mlflow

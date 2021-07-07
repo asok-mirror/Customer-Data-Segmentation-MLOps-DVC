@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+    flask:
+        build: .
+        ports:  
+            - "5000:5000"
+        volumes:
+            - .:/usr/app/
+    tracking-server:
+        build: .
+        ports:
+            - "5001:5001"
+        volumes: 
+            - .:/usr/app/
+        command: bash -c "mlflow db upgrade sqlite:///customerSegmentationmlflow.db && mlflow server --backend-store-uri sqlite:///customerSegmentationmlflow.db --default-artifact-root artifacts --host 0.0.0.0 -p 5001"
