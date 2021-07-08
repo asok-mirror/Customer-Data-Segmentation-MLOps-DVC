@@ -27,8 +27,9 @@ jobs:
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
             docker-compose up --build -d
-            az acr login --name ${{ secrets.CONTAINER_REGISTRY_NAME }}
-            docker login ${{ secrets.CONTAINER_REGISTRY_NAME }}.azurecr.io
+            az acr login --name ${{ secrets.CONTAINER_REGISTRY_NAME }} --expose-token
+            TOKEN=$(az acr login --name ${{ secrets.CONTAINER_REGISTRY_NAME }} --expose-token --output tsv --query accessToken)
+            docker login ${{ secrets.CONTAINER_REGISTRY_NAME }}.azurecr.io --username 00000000-0000-0000-0000-000000000000 --password $TOKEN
             docker-compose down
             docker push  ${{ secrets.CONTAINER_REGISTRY_NAME }}.azurecr.io/
 
