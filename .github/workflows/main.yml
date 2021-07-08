@@ -27,6 +27,7 @@ jobs:
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
             docker-compose up --build -d
+            az acr login --name ${{ secrets.CONTAINER_REGISTRY_NAME }}
             docker-compose down
             docker-compose push
 
