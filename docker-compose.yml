@@ -1,12 +1,14 @@
 version: "3.9"
 services:
     flask:
+        image: customer-segmentation:v1.0
         build: .
         ports:  
             - "5000:5000"
         volumes:
             - .:/usr/app/
     tracking-server:
+        image: customer-segmentation-mlflow:v1.0
         build: .
         ports:
             - "5001:5001"
