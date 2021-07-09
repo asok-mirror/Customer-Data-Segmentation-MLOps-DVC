@@ -5,3 +5,5 @@ docker build -t customer-segmentation .
 docker-compose up --build
 
 docker container run -it alpine /bin/sh 
+
+https://docs.microsoft.com/en-us/azure/container-instances/tutorial-docker-compose
