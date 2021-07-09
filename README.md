@@ -2,8 +2,6 @@ mlflow server --backend-store-uri sqlite:///customerSegmentationmlflow.db --defa
 
 docker build -t customer-segmentation .
 
-docker-compose up --build
-
-docker container run -it alpine /bin/sh 
+#docker-compose up --build
 
 https://docs.microsoft.com/en-us/azure/container-instances/tutorial-docker-compose
