@@ -6,7 +6,6 @@ Customer Segmentation is a KMeans based Clustering app based on the
 
 
 ## Prerequisite
-
 Download [Docker Desktop](https://www.docker.com/products/docker-desktop) 
 
 
@@ -53,6 +52,11 @@ mlflow server --backend-store-uri sqlite:///customerSegmentationmlflow.db --defa
 run web app
 ```
 python app.py 
+```
+
+experient the code using jupyter lab
+```
+jupyter lab notebooks/
 ```
 
 ## References
