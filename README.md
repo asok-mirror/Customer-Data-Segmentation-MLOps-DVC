@@ -8,6 +8,10 @@ Customer Segmentation is a KMeans based Clustering app based on the
 ## Prerequisite
 Download [Docker Desktop](https://www.docker.com/products/docker-desktop) 
 
+run the IDE in a conda env 
+
+Download [Anaconda 3](https://www.anaconda.com/products/individual)
+
 
 ## Project Structure is based on 
 Project based on the [cookiecutter](https://drivendata.github.io/cookiecutter-data-science/) data science project template. 
