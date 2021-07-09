@@ -54,7 +54,7 @@ run web app
 python app.py 
 ```
 
-experient the code using jupyter lab
+experiment the code using jupyter lab
 ```
 jupyter lab notebooks/
 ```
