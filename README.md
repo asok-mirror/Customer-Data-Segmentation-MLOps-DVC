@@ -13,7 +13,7 @@ run the IDE in a conda env
 Download [Anaconda 3](https://www.anaconda.com/products/individual)
 
 
-## Project Structure is based on 
+## Project Structure 
 Project based on the [cookiecutter](https://drivendata.github.io/cookiecutter-data-science/) data science project template. 
 
 ## Usage
